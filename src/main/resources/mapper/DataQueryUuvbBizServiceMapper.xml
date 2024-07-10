@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.DataQueryUuvbBizServiceMapper">
+
+    <resultMap id="AnonymousModelDataQueryUuvb" type="com.example.domain.model.AnonymousModelDataQueryUuvb">
+        <id column="id" property="id"/>
+        <result column="director" property="director"  />
+        <result column="task_status" property="taskStatus"  />
+        <result column="progress" property="progress"  />
+        <result column="create_time" property="createTime"  />
+        <result column="tracking_time" property="trackingTime"  />
+        <result column="work_list_id" property="workListId"  />
+    </resultMap>
+      
+  <select id="listAnonymousModelDataQueryUuvb" resultMap="AnonymousModelDataQueryUuvb">
+      SELECT  `task_track`.`id` AS `id`,`task_track`.`director` AS `director`,`task_track`.`task_status` AS `task_status`,`task_track`.`progress` AS `progress`,`task_track`.`create_time` AS `create_time`,`task_track`.`tracking_time` AS `tracking_time`,`task_track`.`work_list_id` AS `work_list_id` FROM `task_track` AS task_track 
+      <where>
+                <if test="projectIdUfdh != null">
+                  AND `task_track`.`work_list_id` = #{projectIdUfdh}
+                </if>
+        </where>
+       ORDER BY `task_track`.`create_time` DESC 
+        <if test=" currentPageNumberTkwz!=null ">
+          LIMIT 
+        <if test=" currentPageNumberTkwz!=null and 1==1 and pageSizeTgmh!=null ">
+          ${( pageSizeTgmh * ( currentPageNumberTkwz - 1 ) )},
+        </if>
+          #{pageSizeTgmh}
+        </if>
+        
+  </select>
+
+  <select id="countAnonymousModelDataQueryUuvb"  resultType="java.lang.Long">
+      SELECT COUNT(*) FROM `task_track` AS task_track 
+      <where>
+                <if test="projectIdUfdh != null">
+                  AND `task_track`.`work_list_id` = #{projectIdUfdh}
+                </if>
+        </where>
+       ORDER BY `task_track`.`create_time` DESC
+  </select>
+</mapper>

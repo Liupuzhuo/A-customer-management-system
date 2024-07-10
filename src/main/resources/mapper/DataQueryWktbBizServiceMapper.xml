@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.DataQueryWktbBizServiceMapper">
+
+    <resultMap id="AnonymousModelDataQueryWktb" type="com.example.domain.model.AnonymousModelDataQueryWktb">
+        <id column="id" property="id"/>
+        <result column="roleName" property="roleName"  />
+    </resultMap>
+      
+  <select id="listAnonymousModelDataQueryWktb" resultMap="AnonymousModelDataQueryWktb">
+      SELECT  `userRole`.`id` AS `id`,`userRole`.`roleName` AS `roleName` FROM `userRole` AS userRole 
+      
+       ORDER BY `userRole`.`createdTime` DESC 
+        <if test=" currentPageNumberJsli!=null ">
+          LIMIT 
+        <if test=" currentPageNumberJsli!=null and 1==1 and pageSizeMruf!=null ">
+          ${( pageSizeMruf * ( currentPageNumberJsli - 1 ) )},
+        </if>
+          #{pageSizeMruf}
+        </if>
+        
+  </select>
+
+  <select id="countAnonymousModelDataQueryWktb"  resultType="java.lang.Long">
+      SELECT COUNT(*) FROM `userRole` AS userRole 
+      
+       ORDER BY `userRole`.`createdTime` DESC
+  </select>
+</mapper>

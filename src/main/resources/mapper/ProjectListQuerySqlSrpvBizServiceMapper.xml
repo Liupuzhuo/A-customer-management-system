@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ProjectListQuerySqlSrpvBizServiceMapper">
+
+    <resultMap id="AnonymousModelDataQueryPzvq" type="com.example.domain.model.AnonymousModelDataQueryPzvq">
+        <id column="id" property="id"/>
+        <result column="project_name" property="projectName"  />
+        <result column="task_type" property="taskType"  />
+        <result column="intention_feidi" property="intentionFeidi"  />
+        <result column="task_state" property="taskState"  />
+        <result column="manager" property="manager"  />
+        <result column="remark" property="remark"  />
+        <result column="create_time" property="createTime"  />
+        <result column="code" property="code"  />
+        <result column="name" property="name"  />
+        <result column="type" property="type"  />
+    </resultMap>
+      
+  <select id="listAnonymousModelDataQueryPzvq" resultMap="AnonymousModelDataQueryPzvq">
+      SELECT  `worklist`.`id` AS `id`,`worklist`.`project_name` AS `project_name`,`worklist`.`task_type` AS `task_type`,`worklist`.`intention_feidi` AS `intention_feidi`,`worklist`.`task_state` AS `task_state`,`worklist`.`manager` AS `manager`,`worklist`.`remark` AS `remark`,`worklist`.`create_time` AS `create_time`,`status_enum`.`code` AS `code`,`status_enum`.`name` AS `name`,`status_enum`.`type` AS `type` FROM `worklist` AS worklist   LEFT JOIN `status_enum`  ON `worklist`.`task_type` = `status_enum`.`code`
+      <where>
+                <if test="entryNameTkrg != null and entryNameTkrg != ''">
+                  AND `worklist`.`project_name` LIKE concat('%', #{entryNameTkrg} ,'%')
+                </if>
+                <if test="taskTypeAfjc != null and taskTypeAfjc != ''">
+                  AND `worklist`.`task_type` = #{taskTypeAfjc}
+                </if>
+                <if test="intendedEnclaveFdep != null and intendedEnclaveFdep != ''">
+                  AND `worklist`.`intention_feidi` = #{intendedEnclaveFdep}
+                </if>
+                <if test="taskStatusAlfw != null and taskStatusAlfw != ''">
+                  AND `worklist`.`task_state` = #{taskStatusAlfw}
+                </if>
+                <if test="projectManagerKvxe != null and projectManagerKvxe != ''">
+                  AND `worklist`.`manager` LIKE concat('%', #{projectManagerKvxe} ,'%')
+                </if>
+        </where>
+       ORDER BY `worklist`.`create_time` DESC 
+        <if test=" currentPageNumberLoib!=null ">
+          LIMIT 
+        <if test=" currentPageNumberLoib!=null and 1==1 and numberOfEntriesPerPageAlgr!=null ">
+          ${( numberOfEntriesPerPageAlgr * ( currentPageNumberLoib - 1 ) )},
+        </if>
+          #{numberOfEntriesPerPageAlgr}
+        </if>
+        
+  </select>
+
+  <select id="countAnonymousModelDataQueryPzvq"  resultType="java.lang.Long">
+      SELECT COUNT(*) FROM `worklist` AS worklist   LEFT JOIN `status_enum`  ON `worklist`.`task_type` = `status_enum`.`code`
+      <where>
+                <if test="entryNameTkrg != null and entryNameTkrg != ''">
+                  AND `worklist`.`project_name` LIKE concat('%', #{entryNameTkrg} ,'%')
+                </if>
+                <if test="taskTypeAfjc != null and taskTypeAfjc != ''">
+                  AND `worklist`.`task_type` = #{taskTypeAfjc}
+                </if>
+                <if test="intendedEnclaveFdep != null and intendedEnclaveFdep != ''">
+                  AND `worklist`.`intention_feidi` = #{intendedEnclaveFdep}
+                </if>
+                <if test="taskStatusAlfw != null and taskStatusAlfw != ''">
+                  AND `worklist`.`task_state` = #{taskStatusAlfw}
+                </if>
+                <if test="projectManagerKvxe != null and projectManagerKvxe != ''">
+                  AND `worklist`.`manager` LIKE concat('%', #{projectManagerKvxe} ,'%')
+                </if>
+        </where>
+       ORDER BY `worklist`.`create_time` DESC
+  </select>
+</mapper>

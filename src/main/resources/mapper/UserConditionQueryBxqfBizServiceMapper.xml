@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserConditionQueryBxqfBizServiceMapper">
+
+    <resultMap id="AnonymousModelAggregatedQueryZtul" type="com.example.domain.model.AnonymousModelAggregatedQueryZtul">
+        <id column="id" property="id"/>
+        <result column="userName" property="userName"  />
+        <result column="nickname" property="nickname"  />
+        <result column="belongingDepartment" property="belongingDepartment"  />
+        <result column="phoneNumber" property="phoneNumber"  />
+        <result column="stateBfuw" property="stateBfuw"  />
+        <result column="password" property="password"  />
+        <result column="remarksDqdd" property="remarksDqdd"  />
+        <result column="createdTime" property="createdTime"  />
+        <result column="updatedTime" property="updatedTime"  />
+    </resultMap>
+      
+  <select id="listAnonymousModelAggregatedQueryZtul" resultMap="AnonymousModelAggregatedQueryZtul">
+      SELECT  `userinfo`.`id` AS `id`,`userinfo`.`userName` AS `userName`,`userinfo`.`nickname` AS `nickname`,`userinfo`.`belongingDepartment` AS `belongingDepartment`,`userinfo`.`phoneNumber` AS `phoneNumber`,`userinfo`.`stateBfuw` AS `stateBfuw`,`userinfo`.`password` AS `password`,`userinfo`.`remarksDqdd` AS `remarksDqdd`,`userinfo`.`createdTime` AS `createdTime`,`userinfo`.`updatedTime` AS `updatedTime` FROM `userinfo` AS userinfo 
+      <where>
+                <if test="userNameParameterShsp != null and userNameParameterShsp != ''">
+                  AND `userinfo`.`userName` LIKE concat('%', #{userNameParameterShsp} ,'%')
+                </if>
+                <if test="nicknameParametersNgjr != null and nicknameParametersNgjr != ''">
+                  AND `userinfo`.`nickname` LIKE concat('%', #{nicknameParametersNgjr} ,'%')
+                </if>
+                <if test="stateParametersHomh != null and stateParametersHomh != ''">
+                  AND `userinfo`.`stateBfuw` = #{stateParametersHomh}
+                </if>
+                <if test="telephoneParametersJcoe != null and telephoneParametersJcoe != ''">
+                  AND `userinfo`.`phoneNumber` LIKE concat('%', #{telephoneParametersJcoe} ,'%')
+                </if>
+                <if test="departmentParametersVkfx != null and departmentParametersVkfx != ''">
+                  AND `userinfo`.`belongingDepartment` LIKE concat('%', #{departmentParametersVkfx} ,'%')
+                </if>
+                <if test="timeParameterRzhy != null">
+                  AND `userinfo`.`createdTime` <![CDATA[ >= ]]> #{timeParameterRzhy}
+                </if>
+        </where>
+        
+        <if test=" currentPageNumberZqru!=null ">
+          LIMIT 
+        <if test=" currentPageNumberZqru!=null and 1==1 and numberOfEntriesPerPageGzpj!=null ">
+          ${( numberOfEntriesPerPageGzpj * ( currentPageNumberZqru - 1 ) )},
+        </if>
+          #{numberOfEntriesPerPageGzpj}
+        </if>
+        
+  </select>
+
+  <select id="countAnonymousModelAggregatedQueryZtul"  resultType="java.lang.Long">
+      SELECT COUNT(*) FROM `userinfo` AS userinfo 
+      <where>
+                <if test="userNameParameterShsp != null and userNameParameterShsp != ''">
+                  AND `userinfo`.`userName` LIKE concat('%', #{userNameParameterShsp} ,'%')
+                </if>
+                <if test="nicknameParametersNgjr != null and nicknameParametersNgjr != ''">
+                  AND `userinfo`.`nickname` LIKE concat('%', #{nicknameParametersNgjr} ,'%')
+                </if>
+                <if test="stateParametersHomh != null and stateParametersHomh != ''">
+                  AND `userinfo`.`stateBfuw` = #{stateParametersHomh}
+                </if>
+                <if test="telephoneParametersJcoe != null and telephoneParametersJcoe != ''">
+                  AND `userinfo`.`phoneNumber` LIKE concat('%', #{telephoneParametersJcoe} ,'%')
+                </if>
+                <if test="departmentParametersVkfx != null and departmentParametersVkfx != ''">
+                  AND `userinfo`.`belongingDepartment` LIKE concat('%', #{departmentParametersVkfx} ,'%')
+                </if>
+                <if test="timeParameterRzhy != null">
+                  AND `userinfo`.`createdTime` <![CDATA[ >= ]]> #{timeParameterRzhy}
+                </if>
+        </where>
+       
+  </select>
+</mapper>

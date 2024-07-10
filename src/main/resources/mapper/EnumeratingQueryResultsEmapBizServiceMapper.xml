@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.EnumeratingQueryResultsEmapBizServiceMapper">
+
+    <resultMap id="AnonymousModelDataQueryCgiv" type="com.example.domain.model.AnonymousModelDataQueryCgiv">
+        <id column="id" property="id"/>
+        <result column="code" property="code"  />
+        <result column="name" property="name"  />
+        <result column="type" property="type"  />
+    </resultMap>
+      
+  <select id="listAnonymousModelDataQueryCgiv" resultMap="AnonymousModelDataQueryCgiv">
+      SELECT  `status_enum`.`id` AS `id`,`status_enum`.`code` AS `code`,`status_enum`.`name` AS `name`,`status_enum`.`type` AS `type` FROM `status_enum` AS status_enum 
+      
+        
+  </select>
+
+  <select id="countAnonymousModelDataQueryCgiv"  resultType="java.lang.Long">
+      SELECT COUNT(*) FROM `status_enum` AS status_enum 
+      
+       
+  </select>
+</mapper>

@@ -1,0 +1,53 @@
+package com.example.service.bizflow;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import org.apache.commons.lang3.ObjectUtils;
+import java.util.*;
+import java.time.*;
+import java.time.format.*;
+import com.example.service.*;
+import com.example.common.util.*;
+import com.example.common.exception.*;
+import com.example.domain.constant.*;
+import com.example.domain.entity.*;
+import com.example.domain.model.*;
+import com.example.mapper.*;
+
+/**
+ * 跟踪情况服务
+ */
+@Service
+public class TrackingServiceGvfyBizService {
+      
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private DataQueryUuvbBizServiceMapper dataQueryUuvbBizServiceMapper;
+
+    /**
+     * 根据项目id查询跟踪情况列表业务流
+     * @param projectIdUfdh 项目id
+     * @return 跟踪情况列表
+     * @param currentPageNumberTkwz 当前页码
+     * @param pageSizeTgmh 页面大小
+     */
+    public PageOfdataQueryUuvb queryTrackingStatusListBusinessFlowBasedOnProjectIdOowx(Long projectIdUfdh, Integer currentPageNumberTkwz, Integer pageSizeTgmh){
+        PageOfdataQueryUuvb trackingSituationListFvuc = new PageOfdataQueryUuvb();
+
+        // 数据查询
+        PageOfdataQueryUuvb dataQueryUuvb = BizFunctionUtil.createListPage(dataQueryUuvbBizServiceMapper.listAnonymousModelDataQueryUuvb(pageSizeTgmh,currentPageNumberTkwz,projectIdUfdh), dataQueryUuvbBizServiceMapper.countAnonymousModelDataQueryUuvb(pageSizeTgmh,currentPageNumberTkwz,projectIdUfdh).intValue(), PageOfdataQueryUuvb.class);        
+        // 赋值 
+        trackingSituationListFvuc = dataQueryUuvb;
+        
+        return trackingSituationListFvuc;
+    }
+
+}
+ 

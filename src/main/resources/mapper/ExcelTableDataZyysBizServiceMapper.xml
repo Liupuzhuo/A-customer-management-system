@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ExcelTableDataZyysBizServiceMapper">
+
+    <resultMap id="AnonymousModelDataQueryKbap" type="com.example.domain.model.AnonymousModelDataQueryKbap">
+        <result column="project_name" property="projectName"  />
+        <result column="task_type" property="taskType"  />
+        <result column="intention_feidi" property="intentionFeidi"  />
+        <result column="task_state" property="taskState"  />
+        <result column="manager" property="manager"  />
+        <result column="director" property="director"  />
+        <result column="progress" property="progress"  />
+        <result column="tracking_time" property="trackingTime"  />
+    </resultMap>
+      
+  <select id="listAnonymousModelDataQueryKbap" resultMap="AnonymousModelDataQueryKbap">
+      SELECT  `worklist`.`project_name` AS `project_name`,`worklist`.`task_type` AS `task_type`,`worklist`.`intention_feidi` AS `intention_feidi`,`worklist`.`task_state` AS `task_state`,`worklist`.`manager` AS `manager`,`task_track`.`director` AS `director`,`task_track`.`progress` AS `progress`,`task_track`.`tracking_time` AS `tracking_time` FROM `worklist` AS worklist   RIGHT JOIN `task_track`  ON `worklist`.`id` = `task_track`.`work_list_id`
+      
+       ORDER BY `task_track`.`tracking_time` DESC,`worklist`.`project_name` DESC 
+  </select>
+
+  <select id="countAnonymousModelDataQueryKbap"  resultType="java.lang.Long">
+      SELECT COUNT(*) FROM `worklist` AS worklist   RIGHT JOIN `task_track`  ON `worklist`.`id` = `task_track`.`work_list_id`
+      
+       ORDER BY `task_track`.`tracking_time` DESC,`worklist`.`project_name` DESC
+  </select>
+</mapper>

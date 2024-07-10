@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.DataQueryYdfwBizServiceMapper">
+
+    <resultMap id="AnonymousModelDataQueryYdfw" type="com.example.domain.model.AnonymousModelDataQueryYdfw">
+        <id column="id" property="id"/>
+        <result column="userName" property="userName"  />
+        <result column="nickname" property="nickname"  />
+        <result column="purviewCodeArr" property="purviewCodeArr"  />
+    </resultMap>
+      
+  <select id="listAnonymousModelDataQueryYdfw" resultMap="AnonymousModelDataQueryYdfw">
+      SELECT  DISTINCT `userinfo`.`id` AS `id`,`userinfo`.`userName` AS `userName`,`userinfo`.`nickname` AS `nickname`,`purview_relevancy`.`purview_code_arr` AS `purviewCodeArr` FROM `userinfo` AS userinfo   LEFT JOIN `role_relevance`  ON `userinfo`.`id` = `role_relevance`.`user_id`  LEFT JOIN `purview_relevancy`  ON `role_relevance`.`role_id` = `purview_relevancy`.`role_id`
+      <where>
+                <if test="userId != null">
+                  AND `userinfo`.`id` = #{userId}
+                </if>
+        </where>
+        
+  </select>
+
+  <select id="countAnonymousModelDataQueryYdfw"  resultType="java.lang.Long">
+      SELECT COUNT(*) FROM `userinfo` AS userinfo   LEFT JOIN `role_relevance`  ON `userinfo`.`id` = `role_relevance`.`user_id`  LEFT JOIN `purview_relevancy`  ON `role_relevance`.`role_id` = `purview_relevancy`.`role_id`
+      <where>
+                <if test="userId != null">
+                  AND `userinfo`.`id` = #{userId}
+                </if>
+        </where>
+       
+  </select>
+</mapper>

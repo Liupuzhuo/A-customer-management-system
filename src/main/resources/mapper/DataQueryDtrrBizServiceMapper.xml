@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.DataQueryDtrrBizServiceMapper">
+
+    <resultMap id="AnonymousModelDataQueryDtrr" type="com.example.domain.model.AnonymousModelDataQueryDtrr">
+        <result column="roleId" property="roleId"  />
+    </resultMap>
+      
+  <select id="listAnonymousModelDataQueryDtrr" resultMap="AnonymousModelDataQueryDtrr">
+      SELECT  `role_relevance`.`role_id` AS `roleId` FROM `role_relevance` AS role_relevance 
+      <where>
+                <if test="userId != null">
+                  AND `role_relevance`.`user_id` = #{userId}
+                </if>
+        </where>
+        
+        <if test=" pageNumberWftn!=null ">
+          LIMIT 
+        <if test=" pageNumberWftn!=null and 1==1 and numberOfPagesDldr!=null ">
+          ${( numberOfPagesDldr * ( pageNumberWftn - 1 ) )},
+        </if>
+          #{numberOfPagesDldr}
+        </if>
+        
+  </select>
+
+  <select id="countAnonymousModelDataQueryDtrr"  resultType="java.lang.Long">
+      SELECT COUNT(*) FROM `role_relevance` AS role_relevance 
+      <where>
+                <if test="userId != null">
+                  AND `role_relevance`.`user_id` = #{userId}
+                </if>
+        </where>
+       
+  </select>
+</mapper>

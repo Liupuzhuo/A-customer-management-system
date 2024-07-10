@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.EnumerationListQuerySjzoBizServiceMapper">
+
+    <resultMap id="AnonymousModelDataQueryKblp" type="com.example.domain.model.AnonymousModelDataQueryKblp">
+        <id column="id" property="id"/>
+        <result column="code" property="code"  />
+        <result column="name" property="name"  />
+        <result column="type" property="type"  />
+    </resultMap>
+      
+  <select id="listAnonymousModelDataQueryKblp" resultMap="AnonymousModelDataQueryKblp">
+      SELECT  `status_enum`.`id` AS `id`,`status_enum`.`code` AS `code`,`status_enum`.`name` AS `name`,`status_enum`.`type` AS `type` FROM `status_enum` AS status_enum 
+      <where>
+            AND `status_enum`.`type` = #{enumerationTypeZzuk}
+        </where>
+        
+  </select>
+
+  <select id="countAnonymousModelDataQueryKblp"  resultType="java.lang.Long">
+      SELECT COUNT(*) FROM `status_enum` AS status_enum 
+      <where>
+            AND `status_enum`.`type` = #{enumerationTypeZzuk}
+        </where>
+       
+  </select>
+</mapper>
